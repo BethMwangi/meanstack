@@ -1,13 +1,25 @@
 import path from 'path';
+import webpack from 'webpack';
 
 
 export default {
-    devtools: 'eval-source-map',
-    entry: path.join(__dirname, '/client/index.js'),
+
+    entry:
+        [
+            'webpack-hot-middleware/client',
+            path.join(__dirname, '/client/index.js')
+        ],
     output: {
         path: '/',
+        publicPath: '/',
         filename: 'bundle.js'
     },
+    plugins: [
+        new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin()
+
+    ],
 
     module: {
         rules: [
@@ -15,13 +27,13 @@ export default {
                 test: /\.jsx?$/,
                 exclude: ['node_modules'],
                 include: path.join(__dirname, 'client'),
-                loader:  'babel-loader'
+                loaders: [  'babel-loader']
 
             }
         ]
     },
     resolve: {
-        extensions: [ '.js']
+        extensions: ['.js']
     }
 
 };

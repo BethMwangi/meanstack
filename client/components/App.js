@@ -1,7 +1,12 @@
 import React from 'react';
+import Greetings from './Greetings';
+class App extends React.Component {
+    render() {
 
-export default () => {
-    return (
-        <h1> Hello Kenya </h1>
-    );
+        return (
+           <Greetings />
+        );
+    }
 }
+
+export default App;
